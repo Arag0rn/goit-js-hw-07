@@ -1,7 +1,6 @@
 import { galleryItems } from './gallery-items.js';
 // Change code below this line
 
-console.log(galleryItems);
 
 
 const collection = document.querySelector('.gallery');
@@ -19,16 +18,27 @@ const listImg = galleryItems.map(({preview, original, description}) =>
    </a>
  </li>`).join('')
 
- 
 
-  collection.insertAdjacentHTML('afterbegin', listImg )
+collection.insertAdjacentHTML('afterbegin', listImg )
 
 
-  collection.onclick = (event) => {
-  console.dir(event.target) 
+collection.onclick = (event) => {
    event.preventDefault()
-	basicLightbox.create(`
-		<img width="1400" height="900" src="${event.target.dataset.source}">
-	`).show()
+   if (!event.target.classList.contains("gallery__image")){
+   return;
+}
+   const markup = `<img width="1400" height="900" src="${event.target.dataset.source}">`
+   const instance = basicLightbox.create(markup,)
+   instance.show()
+
+window.addEventListener("keydown", onEscape)
+
+function onEscape(event) {
+   if (event.code === "Escape") {
+    instance.close(window.removeEventListener("keydown", onEscape));
+  }
+};
 
 }
+
+
