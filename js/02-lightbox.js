@@ -14,20 +14,12 @@ const listImg = galleryItems.map(({preview, original, description}) =>
  collection.insertAdjacentHTML('afterbegin', listImg )
 
 
-collection.onclick = (event) => {
-    event.preventDefault()
-    if (!event.target.classList.contains("gallery__image")){
-        return;
-     }
-
      let gallery = new SimpleLightbox('.gallery a', {
       captionsData: `alt`,
       captionDelay: 250,
    });
-     gallery.on('show.simplelightbox', function () {
 
-     });
 
-}
+
 
 
